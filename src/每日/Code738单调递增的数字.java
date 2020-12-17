@@ -1,6 +1,8 @@
 package 每日;
 
 
+import java.util.HashMap;
+
 /**
  * @author zhang dong
  * @Description
@@ -9,6 +11,7 @@ package 每日;
  */
 public class Code738单调递增的数字 {
     public int monotoneIncreasingDigits(int N) {
+
         char[] chars = String.valueOf(N).toCharArray();
         int k=chars.length;
         for(int i=chars.length-1;i>0;i--){
