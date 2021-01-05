@@ -7,6 +7,7 @@ package 每日;
  */
 public class Code435无重叠区间 {
     public int eraseOverlapIntervals(int[][] intervals) {
-
+  // TODO: 2021/1/5  未解决
+        return 1;
     }
 }
