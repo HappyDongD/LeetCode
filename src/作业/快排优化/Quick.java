@@ -29,6 +29,7 @@ package 作业.快排优化;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The {@code Quick} class provides static methods for sorting an
@@ -58,26 +59,11 @@ public class Quick {
         assert isSorted(a);
     }
 
-    // quicksort the subarray from a[lo] to a[hi]
-    private static void sort(Comparable[] a, int lo, int hi) {
-        //三中取数
-//        int mid = (lo + hi) / 2;
-//
-//        if (less(a[hi], a[mid])) {
-//            exch(a, mid, hi);
-//        }
-//        if (less(a[lo], a[hi])) {
-//            exch(a, lo, hi);
-//        }
-//        if (less(a[lo], a[mid])) {
-//            exch(a, mid, lo);
-//        }
-
-
+    private static void sort3(Comparable[] a, int lo, int hi) {
         while (lo < hi) {
             Random random = new Random();
-            int ranNum = random.nextInt(hi-lo+1)+lo;
-            exch(a,lo,ranNum);
+            int ranNum = random.nextInt(hi - lo + 1) + lo;
+            exch(a, lo, ranNum);
             //基准划分后的索引位置
             int j = partition(a, lo, hi);
             //左边进行排序
@@ -87,6 +73,41 @@ public class Quick {
         }
     }
 
+    // quicksort the subarray from a[lo] to a[hi]
+    private static void sort(Comparable[] a, int lo, int hi) {
+
+        while (lo < hi) {
+            int j = partition(a, lo, hi);
+            int mid = (lo & hi) + (lo^ hi) >> 1;
+            if (j <mid) {
+                sort(a, j + 1, hi);
+                hi = j - 1;
+            } else {
+                sort(a, lo, j - 1);
+                lo = j + 1;
+            }
+        }
+    }
+    private static void sort4(Comparable[] a, int lo, int hi) {
+        //三中取数
+        int mid = (lo + hi) / 2;
+
+        if (less(a[hi], a[mid])) {
+            exch(a, mid, hi);
+        }
+        if (less(a[lo], a[hi])) {
+            exch(a, lo, hi);
+        }
+        if (less(a[lo], a[mid])) {
+            exch(a, mid, lo);
+        }
+
+        while (lo < hi) {
+            int j = partition(a, lo, hi);
+            sort4(a, lo, j - 1); // recurse on left part
+            lo = j + 1; // loop to sort the right part
+        }
+    }
     // partition the subarray a[lo..hi] so that a[lo..j-1] <= a[j] <= a[j+1..hi]
     // and return the index j.
     private static int partition(Comparable[] a, int lo, int hi) {
@@ -230,15 +251,19 @@ public class Quick {
 //            StdOut.println(ith);
 //        }
 
-                int ms = 3000;
-                Comparable[] arr = new Comparable[3000];
-                for (int i = 0; i < 3000; i++) {
-                    arr[i] = ms - i;
-                }
-                long m = System.currentTimeMillis();
-                sort(arr, 0, arr.length - 1);
-                long n = System.currentTimeMillis();
-                System.out.println("耗时= " + (n - m));
+        int ms = 10000;
+        Comparable[] arr2 = new Comparable[ms];
+        for (int i = 0; i < ms; i++) {
+            arr2[i] = ms - i;
+//            arr2[i] =  i;
+        }
+        long k = System.currentTimeMillis();
+        sort(arr2, 0, arr2.length - 1);
+        long l = System.currentTimeMillis();
+        System.out.println("sort2耗时= " + (l - k));
+
+
+
 
     }
 
