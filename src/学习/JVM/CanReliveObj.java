@@ -1,5 +1,9 @@
 package 学习.JVM;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 /**
  * @author zhang dong
  * @Description 测试finalize（）方法，让对象进行复活
