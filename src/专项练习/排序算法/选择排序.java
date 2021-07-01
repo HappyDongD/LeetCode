@@ -15,18 +15,19 @@ public class 选择排序 {
     }
 
     public static int[] paixu(int[] ls) {
-        //先找到最小的
+        //先找最小的
+        int min=0;
         for (int i = 0; i < ls.length; i++) {
-            int min = i;
-            for (int j = i; j < ls.length; j++) {
-                if (ls[min] > ls[j]) {
+            for (int j = i; j <ls.length; j++) {
+                if (ls[min]>ls[j]){
                     min = j;
                 }
             }
-            int temp = ls[i];
-            ls[i] = ls[min];
-            ls[min] = temp;
+            int temp = ls[min];
+            ls[min] = ls[i];
+            ls[i] = temp;
         }
+
         return ls;
     }
 }

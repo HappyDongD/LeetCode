@@ -15,17 +15,15 @@ public class 插入排序 {
     }
 
     public static int[] paixu(int[] ls) {
-        //从当前位置往前扫描，找到自己的位置
         for (int i = 0; i < ls.length; i++) {
-            int preIndex=i-1;
-            int current = ls[i];
-            while(preIndex>=0&&ls[preIndex]>current){
-                ls[preIndex + 1] = ls[preIndex];
-                preIndex--;
+            int pre = i - 1;
+            int index = ls[i];
+            while(pre>=0&&ls[pre]>index){
+                ls[pre+1] = ls[pre];
+                pre--;
             }
-            ls[preIndex + 1] = current;
+            ls[pre +1]=index;
         }
-
         return ls;
     }
 }
