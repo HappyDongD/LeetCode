@@ -1,8 +1,6 @@
 package 每日;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author zhangdong
@@ -11,7 +9,7 @@ import java.util.Map;
  */
 public class CODE846一手顺子 {
     public static void main(String[] args) {
-        int f[] = {1,2,3,6,2,3,4,7,8};
+        int[] f = {1, 2, 3, 6, 2, 3, 4, 7, 8};
         System.out.println("isNStraightHand(f, 3) = " + isNStraightHand(f, 3));
 
     }
@@ -29,7 +27,7 @@ public class CODE846一手顺子 {
             if (h[i] == 0) {
                 int j = i;
                 int n = 0;
-                while (j<len&&n<groupSize) {
+                while (j < len && n < groupSize) {
                     if (h[j] != -1) {
                         if (hand[j] - hand[i] == n) {
                             n++;
